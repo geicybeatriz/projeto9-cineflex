@@ -13,7 +13,6 @@ export const TituloElemento = styled.h2`
     text-align: center;
 
     margin: ${props => props.sucesso === false ? 0 : "0 25vw"};
-    margin-top: 67px;
     color: ${props => props.sucesso === false ? "#293845" : "#247A6B"};
 
     display: flex;

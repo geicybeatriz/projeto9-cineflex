@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-export const ContainerSessoes = styled.main`
+export const Sessoes = styled.main`
+    display: flex;
+    flex-direction: column;
+    margin-top: 67px;
+    background-color: #ffffff;
+`;
+
+export const ContainerSessoes = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;

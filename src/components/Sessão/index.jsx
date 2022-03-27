@@ -1,33 +1,41 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Titulo from "../Titulo";
-import { ContainerSessoes, DiaSemana, Horarios, Hora } from "./style";
+import { ContainerSessoes, DiaSemana, Horarios, Hora, Sessoes } from "./style";
+import Footer from "../Footer/"
 
 
 
 export default function Sessao(){
     const {idFilme} = useParams();
-    console.log(idFilme);
-
-    //const [sessoes, setSessoes] = useState([]);
+    const [sessoes, setSessoes] = useState([]);
+    const [infoFilme, setInfoFilme] = useState({});
 
     useEffect(() => {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`);
-        promise.then((response) => console.log(response.data))
+        promise.then((response) => 
+            {setSessoes(response.data.days)
+            setInfoFilme(response.data)})
         }, []);
 
     return (
-        <>
+        <Sessoes>
             <Titulo texto="Selecione o horário" sucesso={false}/>
             <ContainerSessoes>
-                <DiaSemana>Quinta-Feira - 24/10/2022 </DiaSemana>
-                <Horarios>
-                    <Hora>15:00</Hora>
-                    <Hora>19:00</Hora>
-                </Horarios>
+                {sessoes.map(({id:idSession, weekday, date, showtimes}) => 
+                    <>
+                        <DiaSemana key={idSession}>{weekday} - {date} </DiaSemana>
+                        <Horarios>
+                            {showtimes.map(({name, id:idHora}) =>
+                                <Hora id={idHora}>{name}</Hora>
+                            )}
+                        </Horarios>
+                    </>
+                )}
             </ContainerSessoes>
-        </>
+            <Footer infoFilme={infoFilme}/>
+        </Sessoes>
 
     );
 }
