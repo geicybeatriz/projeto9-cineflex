@@ -13,6 +13,4 @@ export default function Footer(props){
             <NomeFilme>{title}</NomeFilme>
         </ContainerFooter>
     );
-
-
 }

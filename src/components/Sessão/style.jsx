@@ -52,4 +52,5 @@ export const Hora = styled.button`
     border:none;
 
     margin-right: 8px;
+    cursor: pointer;
 `;

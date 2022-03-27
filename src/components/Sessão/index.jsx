@@ -1,11 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Titulo from "../Titulo";
 import { ContainerSessoes, DiaSemana, Horarios, Hora, Sessoes } from "./style";
 import Footer from "../Footer/"
-
-
 
 export default function Sessao(){
     const {idFilme} = useParams();
@@ -28,7 +26,9 @@ export default function Sessao(){
                         <DiaSemana key={idSession}>{weekday} - {date} </DiaSemana>
                         <Horarios>
                             {showtimes.map(({name, id:idHora}) =>
+                            <Link to={`/assentos/${idSession}`}>
                                 <Hora id={idHora}>{name}</Hora>
+                            </Link>
                             )}
                         </Horarios>
                     </>
