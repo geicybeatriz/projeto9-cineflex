@@ -9,8 +9,7 @@ import Formulario from "../Formulario";
 export default function Assentos(){
     const {idHora} = useParams();
     const [poltronas, setPoltronas] = useState({});
-    const [status, setStatus] = useState([]);
-
+    const [assentosSelecionados, setAssentosSelecionados] = useState([]);
 
     useEffect(() =>{
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idHora}/seats`);
@@ -20,10 +19,10 @@ export default function Assentos(){
     if(!poltronas.seats) return (<div>Espera aí. Confia!</div>);
 
     function selecionarAssento(id){
-        if(status.includes(id)){
-            setStatus(status.filter((e) => e === id ? false : true));
+        if(assentosSelecionados.includes(id)){
+            setAssentosSelecionados(assentosSelecionados.filter((e) => e === id ? false : true));
         } else {
-            setStatus([...status, id]);
+            setAssentosSelecionados([...assentosSelecionados, id]);
         }
     }
 
@@ -36,7 +35,7 @@ export default function Assentos(){
                     {poltronas.seats.map(({id, name, isAvailable}) => 
                     <>
                     {isAvailable ? <BolinhaCinza id={id} 
-                                    selecionado={status.includes(id)} 
+                                    selecionado={assentosSelecionados.includes(id)} 
                                     onClick={() => selecionarAssento(id)} >{name}</BolinhaCinza> 
                         :
                         <BolinhaAmarela id={id} onClick={() => alert("Esse assento não está disponível.")}>{name}</BolinhaAmarela>}
@@ -59,12 +58,10 @@ export default function Assentos(){
                     </Exemplo>
                 </Exemplos>
 
-                <Formulario />
+                <Formulario assentosSelecionados={assentosSelecionados}/>
             </Container>
 
             <Footer movie={poltronas.movie} day={poltronas.day} name={poltronas.name} />
-
-            
         </>
     );
 }
