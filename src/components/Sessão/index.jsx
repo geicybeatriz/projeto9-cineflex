@@ -35,7 +35,7 @@ export default function Sessao(){
                 )}
             </ContainerSessoes>
             
-            <Footer infoFilme={infoFilme}/>
+            <Footer movie={infoFilme} day={{weekday:""}} name=""/>
         </Sessoes>
     );
 }

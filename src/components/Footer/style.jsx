@@ -36,9 +36,8 @@ export const ImgFilme = styled.img`
     height: 72px;
 `;
 
-export const NomeFilme = styled.h1`
-    width: 169px;
-    height: 40px;
+export const InfoFilme = styled.h1`
+    width: 100%;
 
     font-family: 'Roboto';
     font-style: normal;
@@ -49,4 +48,10 @@ export const NomeFilme = styled.h1`
     align-items: center;
 
     color: #293845;
+`;
+
+export const ContainerFilme = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;

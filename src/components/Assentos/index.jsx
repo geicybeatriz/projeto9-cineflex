@@ -1,5 +1,5 @@
 import Titulo from "../Titulo";
-//import Footer from "../Footer";
+import Footer from "../Footer";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -39,7 +39,7 @@ export default function Assentos(){
                                     selecionado={status.includes(id)} 
                                     onClick={() => selecionarAssento(id)} >{name}</BolinhaCinza> 
                         :
-                        <BolinhaAmarela id={id}>{name}</BolinhaAmarela>}
+                        <BolinhaAmarela id={id} onClick={() => alert("Esse assento não está disponível.")}>{name}</BolinhaAmarela>}
                     </>
                     )}
                 </ContainerAssentos>
@@ -61,6 +61,8 @@ export default function Assentos(){
 
                 <Formulario />
             </Container>
+
+            <Footer movie={poltronas.movie} day={poltronas.day} name={poltronas.name} />
 
             
         </>

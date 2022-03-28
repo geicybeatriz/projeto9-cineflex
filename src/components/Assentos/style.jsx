@@ -56,6 +56,7 @@ export const BolinhaVerde = styled.div`
     letter-spacing: 0.04em;
 
     color: #000000;
+    cursor:pointer;
 `;
 
 export const BolinhaCinza = styled.div`
@@ -80,6 +81,7 @@ export const BolinhaCinza = styled.div`
     letter-spacing: 0.04em;
 
     color: #000000;
+    cursor:pointer;
 `;
 
 export const BolinhaAmarela = styled.div`
@@ -103,13 +105,10 @@ export const BolinhaAmarela = styled.div`
     letter-spacing: 0.04em;
 
     color: #000000;
-
-    pointer-events:none;
+    cursor:pointer;
 `;
 
 export const Descricao = styled.p`
-    width: 91px;
-
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;

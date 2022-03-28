@@ -37,6 +37,8 @@ export const Inputs = styled.input`
     box-sizing: border-box;
     border-radius: 3px;
 
+    padding-left: 18px;
+
     &::placeholder{
         font-family: 'Roboto';
         font-style: italic;
@@ -58,7 +60,7 @@ export const Button = styled.button`
     border-radius: 3px;
     border:none;
 
-    margin:57px 0 30px 0;
+    margin:57px 0 60px 0;
 
     font-family: 'Roboto';
     font-style: normal;
