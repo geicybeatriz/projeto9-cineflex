@@ -15,7 +15,7 @@ export default function Sessao(){
         promise.then((response) => 
             {setSessoes(response.data.days)
             setInfoFilme(response.data)})
-        }, []);
+        }, [idFilme]);
 
     return (
         <Sessoes>
@@ -26,16 +26,16 @@ export default function Sessao(){
                         <DiaSemana key={idSession}>{weekday} - {date} </DiaSemana>
                         <Horarios>
                             {showtimes.map(({name, id:idHora}) =>
-                            <Link to={`/assentos/${idSession}`}>
-                                <Hora id={idHora}>{name}</Hora>
+                            <Link to={`/assentos/${idHora}`}>
+                                <Hora key={idHora} id={idHora}>{name}</Hora>
                             </Link>
                             )}
                         </Horarios>
                     </>
                 )}
             </ContainerSessoes>
+            
             <Footer infoFilme={infoFilme}/>
         </Sessoes>
-
     );
 }
