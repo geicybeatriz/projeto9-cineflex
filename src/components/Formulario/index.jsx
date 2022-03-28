@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {Form, Label, Inputs, Button} from "./style";
+import { useNavigate } from "react-router-dom";
 
 export default function Formulario(props){
     const {assentosSelecionados} = props
@@ -22,7 +22,7 @@ export default function Formulario(props){
         }
 
         const dadosConfirmacao = {
-            id: assentosSelecionados,
+            ids: assentosSelecionados,
             nome: nome,
             cpf: cpf.replace(/\D/g,"")
         }
@@ -30,6 +30,7 @@ export default function Formulario(props){
         console.log("obj que envia",dadosConfirmacao);
         const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosConfirmacao);
         promise.then(navigate("/sucesso"));
+        promise.catch(response => console.log("Erro", response));
     }
 
     return (
