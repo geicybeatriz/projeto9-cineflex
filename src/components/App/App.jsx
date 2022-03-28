@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Header from "../Header/Header";
+import Header from "../Header"
 import ContainerInicio from "../Inicio";
 import Sessao from "../Sessão";
 import Assentos from "../Assentos";
