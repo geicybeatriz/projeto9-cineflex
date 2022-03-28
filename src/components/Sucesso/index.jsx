@@ -1,29 +1,37 @@
 import Titulo from "../Titulo";
+import { Link } from "react-router-dom";
 import { ContainerSucesso, Confirmacao, Dados, Botao } from "./style";
 
+export default function Sucesso({dadosCompra, atualizarDados}){
+    const {assento, cpfComprador, horario, nomeComprador, title, weekday} = dadosCompra;
+    console.log(dadosCompra);
 
+    if(!assento){
+        return <h3>Carregando...</h3>;
+    }
 
-export default function Sucesso(){
     return (
         <ContainerSucesso>
             <Titulo texto="Pedido feito com sucesso!" sucesso={true}/>
             <Confirmacao>
                 <Dados>
                     <h3>Filme e sessão</h3>
-                    <p>nome do filme</p>
-                    <p>data e hora</p>
+                    <p>{title}</p>
+                    <p>{weekday} - {horario}</p>
                 </Dados>
                 <Dados>
                     <h3>Ingressos</h3>
-                    <p>Assento: name do assento</p>
+                    {assento.map((elemento) => <p>Assento: {elemento}</p>)}
                 </Dados>
                 <Dados>
                     <h3>Comprador</h3>
-                    <p>Nome: Drácula</p>
-                    <p>CPF: 123.123.456-45</p>
+                    <p>Nome: {nomeComprador}</p>
+                    <p>CPF: {cpfComprador.slice(0,3)}.{cpfComprador.slice(3,6)}.{cpfComprador.slice(6,9)}-{cpfComprador.slice(9,11)}</p>
                 </Dados>
             </Confirmacao>
-            <Botao>Voltar para Home</Botao>
+            <Link to="/">
+                <Botao onClick={() => atualizarDados('', '', '', '', '', [])}>Voltar para Home</Botao>
+            </Link>
         </ContainerSucesso>
     );
 

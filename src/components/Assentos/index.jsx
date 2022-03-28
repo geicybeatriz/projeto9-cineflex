@@ -6,10 +6,12 @@ import { useParams } from "react-router-dom";
 import {Container, ContainerAssentos, Exemplos, Exemplo, BolinhaAmarela, BolinhaCinza, BolinhaVerde, Descricao} from "./style";
 import Formulario from "../Formulario";
 
-export default function Assentos(){
+export default function Assentos({atualizarDados}){
     const {idHora} = useParams();
     const [poltronas, setPoltronas] = useState({});
     const [assentosSelecionados, setAssentosSelecionados] = useState([]);
+    const [numPoltrona, setNumPoltrona] = useState([]);
+
 
     useEffect(() =>{
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idHora}/seats`);
@@ -18,11 +20,13 @@ export default function Assentos(){
     
     if(!poltronas.seats) return (<div>Espera aí. Confia!</div>);
 
-    function selecionarAssento(id){
+    function selecionarAssento(id,name){
         if(assentosSelecionados.includes(id)){
             setAssentosSelecionados(assentosSelecionados.filter((e) => e === id ? false : true));
+            setNumPoltrona(numPoltrona.filter((e) => e === name ? false : true));
         } else {
             setAssentosSelecionados([...assentosSelecionados, id]);
+            setNumPoltrona([...numPoltrona, name]);
         }
     }
 
@@ -36,7 +40,7 @@ export default function Assentos(){
                     <>
                     {isAvailable ? <BolinhaCinza id={id} 
                                     selecionado={assentosSelecionados.includes(id)} 
-                                    onClick={() => selecionarAssento(id)} >{name}</BolinhaCinza> 
+                                    onClick={() => selecionarAssento(id, name)} >{name}</BolinhaCinza> 
                         :
                         <BolinhaAmarela id={id} onClick={() => alert("Esse assento não está disponível.")}>{name}</BolinhaAmarela>}
                     </>
@@ -58,7 +62,11 @@ export default function Assentos(){
                     </Exemplo>
                 </Exemplos>
 
-                <Formulario assentosSelecionados={assentosSelecionados}/>
+                <Formulario assentosSelecionados={assentosSelecionados} 
+                            numPoltrona={numPoltrona} 
+                            setNumPoltrona={setNumPoltrona}
+                            atualizarDados={atualizarDados}
+                            poltronas={poltronas}/>
             </Container>
 
             <Footer movie={poltronas.movie} day={poltronas.day} name={poltronas.name} />

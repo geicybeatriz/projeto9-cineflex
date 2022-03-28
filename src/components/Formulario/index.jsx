@@ -4,7 +4,9 @@ import {Form, Label, Inputs, Button} from "./style";
 import { useNavigate } from "react-router-dom";
 
 export default function Formulario(props){
-    const {assentosSelecionados} = props
+    const {assentosSelecionados, numPoltrona, atualizarDados, poltronas} = props
+    const {name:hora, day:{date},movie:{title}} = poltronas;
+    //console.log("esse", poltronas);
     const navigate = useNavigate();
     const [nome, setNome] =useState("");
     const [cpf, setCPF] = useState("");
@@ -26,10 +28,10 @@ export default function Formulario(props){
             nome: nome,
             cpf: cpf.replace(/\D/g,"")
         }
-
-        console.log("obj que envia",dadosConfirmacao);
+        
         const promise = axios.post("https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many", dadosConfirmacao);
-        promise.then(navigate("/sucesso"));
+        promise.then(() => {navigate("/sucesso");
+                            atualizarDados(title, date, hora, nome, cpf, numPoltrona)});
         promise.catch(response => console.log("Erro", response));
     }
 

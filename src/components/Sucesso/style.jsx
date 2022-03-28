@@ -25,7 +25,7 @@ export const Dados = styled.article`
     flex-direction: column;
     align-items: left;
 
-    margin: 20px 0; 
+    margin: 10px 0; 
 
     h3, p{
         font-family: 'Roboto';
@@ -71,5 +71,5 @@ export const Botao = styled.button`
     border-radius: 3px;
     border: none;
 
-    margin: 62px 0;
+    margin: 50px 0;
 `;
